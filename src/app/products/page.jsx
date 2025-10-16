@@ -1,36 +1,20 @@
 "use client";
-
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "../features/pages/pageSlice";
 import "./products.css";
 
 export default function Products() {
-  const products = useSelector((state) => state.pages.products);
-  const [cart, setCart] = useState([]);
+  const { products, cart } = useSelector((state) => state.pages);
+  const dispatch = useDispatch();
 
-  const addToCart = (product) => {
-    if (!cart.find((item) => item.id === product.id)) {
-      setCart([...cart, product]);
-    }
-  };
-
-  const removeFromCart = (productId) => {
-    setCart(cart.filter((item) => item.id !== productId));
-  };
-
-  const isInCart = (productId) => {
-    return cart.some((item) => item.id === productId);
-  };
+  const isInCart = (id) => cart.some((item) => item.id === id);
 
   return (
     <div id="d">
       <nav className="navbar">
-        <div className="nav-left">
-          <h2>My Store</h2>
-        </div>
-        <div className="nav-right">
-          <span>🛒 Cart: {cart.length}</span>
-        </div>
+        <h2>My Store</h2>
+        <span>🛒 Cart: {cart.length}</span>
       </nav>
 
       <div className="products-container">
@@ -41,18 +25,14 @@ export default function Products() {
               <img src={p.image} alt={p.name} className="product-image" />
               <div className="product-details">
                 <span className="product-name">{p.name}</span>
-                <span className="product-price">{p.price}</span><br/>
-                
-
+                <span className="product-price">{p.price}</span>
+                <br />
                 {isInCart(p.id) ? (
-                  <button
-                    className="remove-btn"
-                    onClick={() => removeFromCart(p.id)}
-                  >
+                  <button className="remove-btn" onClick={() => dispatch(removeFromCart(p.id))}>
                     Remove from Cart
                   </button>
                 ) : (
-                  <button className="add-btn" onClick={() => addToCart(p)}>
+                  <button className="add-btn" onClick={() => dispatch(addToCart(p))}>
                     Add to Cart
                   </button>
                 )}

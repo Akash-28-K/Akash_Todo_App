@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 function About() {
   const { author, about } = useSelector((state) => state.pages);
   return (
-    <div style={{ padding: "5px" ,alignItems: "center"}} id="di">
+    <div style={{ padding: "5px" ,alignItems: "center"}} id="d">
       <div style={{
   display: "flex",
   flexDirection: "column",

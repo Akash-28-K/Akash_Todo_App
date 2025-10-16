@@ -5,14 +5,9 @@ const pageSlice = createSlice({
   initialState: {
     title: "Router Sample App",
     author: "AKASH K",
-    about: `            I am Akash, a passionate student from 3rd Year BTech-IT.I enjoy exploring new technologies and building creative
-projects.My interests include web development, Java programming, and IoT systems.I love solving real-world problems through coding and 
-innovation.I have experience working with React, Spring Boot, and MySQL.I believe in continuous learning and self-improvement.Teamwork,
- dedication, and curiosity drive my work ethic.Currently, I am working on several academic and personal tech projects.I enjoy participating 
- in hackathons and technical workshops.My goal is to become a skilled software engineer and innovator.`
-,
+    about: `I am Akash, a passionate student from 3rd Year BTech-IT. I enjoy exploring new technologies and building creative projects. My interests include web development, Java programming, and IoT systems. I have experience working with React, Spring Boot, and MySQL. I enjoy hackathons and technical workshops.`,
     products: [
-  { id: 1, name: "Laptop", price: "$999", image: "/1.png" },
+      { id: 1, name: "Laptop", price: "$999", image: "/1.png" },
   { id: 2, name: "Smartphone", price: "$599", image: "/2.png" },
   { id: 3, name: "Headphones", price: "$199", image: "/5.png" },
   { id: 4, name: "Smartwatch", price: "$249", image: "/3.png" },
@@ -42,9 +37,20 @@ innovation.I have experience working with React, Spring Boot, and MySQL.I believ
   { id: 28, name: "Cooling Fan", price: "$35", image: "/3.png" },
   { id: 29, name: "Gaming Chair", price: "$189", image: "/4.png" },
   { id: 30, name: "Desk Lamp", price: "$45", image: "/5.png" }
-]
-},
-  reducers: {}
+    ],
+    cart: []
+  },
+  reducers: {
+    addToCart: (state, action) => {
+      if (!state.cart.find((item) => item.id === action.payload.id)) {
+        state.cart.push(action.payload);
+      }
+    },
+    removeFromCart: (state, action) => {
+      state.cart = state.cart.filter((item) => item.id !== action.payload);
+    }
+  }
 });
 
+export const { addToCart, removeFromCart } = pageSlice.actions;
 export default pageSlice.reducer;

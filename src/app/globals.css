@@ -40,7 +40,7 @@ nav a {
 }
 
 nav a:hover {
-  background-color:  #1a1a1a;
+  background-color:  #1ee9ff;
   color:#ff0099ff;
 }
 
@@ -92,7 +92,7 @@ button {
 }
 
 button:hover {
-  background-color: #005bb5;
+  background-color: #0070f3;
   transform: translateY(-2px);
 }
 
